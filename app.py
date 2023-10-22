@@ -7,9 +7,9 @@ def index():
     return render_template('index.html')
 
 """
-1. create 'templates' folder
-2. create index.html in templates folder
-3. import render_template function from flask module
-4. create home route and return render_template('index.html')
+1. create 'static' folder
+2. create style.css in static folder
+3. link style.css with index.html
+4. change body background-color in style.css
 """
 
