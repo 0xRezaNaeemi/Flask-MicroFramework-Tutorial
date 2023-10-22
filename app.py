@@ -4,20 +4,27 @@ from flask import Flask
 # create app instance from Flask class
 app = Flask(__name__)
 
-# create url/route with Decorator, slash means homepage
+# home page
 @app.route('/')
 def index():
     return "This is home/index page!"
 
-# create welcome page
-@app.route('/welcome/')
-def welcome():
-    return "This is welcome page!"
-
-# this is another page route
-@app.route('/blog/posts/flask/')
-def welcome():
+# blog page
+@app.route('/blog/')
+def blog():
     return "welcome to flask journey!"
+
+# using post_id variable in route
+@app.route('/blog/<int:post_id>/')
+def postId(post_id):
+    return f"post id is: {post_id}"
+
+# No need to write str variable type in route
+@app.route('/welcome/<name>/')
+def sayWelcome(name):
+    return f"welcome: {name}"
+
+
 
 """
 1. create a folder 
