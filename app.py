@@ -1,10 +1,23 @@
-from flask import Flask
+# import Flask class from flask modules
+from flask import Flask 
 
+# create app instance from Flask class
 app = Flask(__name__)
 
+# create url/route with Decorator, slash means homepage
 @app.route('/')
 def index():
-    return "Hello Web World!"
+    return "This is home/index page!"
+
+# create welcome page
+@app.route('/welcome/')
+def welcome():
+    return "This is welcome page!"
+
+# this is another page route
+@app.route('/blog/posts/flask/')
+def welcome():
+    return "welcome to flask journey!"
 
 """
 1. create a folder 
