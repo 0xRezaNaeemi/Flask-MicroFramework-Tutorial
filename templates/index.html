@@ -7,14 +7,6 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 </head>
 <body>
-    Hello <h1 style="color: aqua">{{name}}</h1>
-    <br>
-    <ul>
-        {% for number in my_list %}
-            <li>
-                {{number}}
-            </li>
-        {% endfor %}
-    </ul>
+    {{data}}
 </body>
 </html>

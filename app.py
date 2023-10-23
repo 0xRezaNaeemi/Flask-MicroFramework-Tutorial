@@ -1,20 +1,14 @@
-from flask import Flask , render_template
+from flask import Flask , render_template, request
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    context = [1, 2, 3, 4, 5]
-    return render_template('index.html', my_list=context)
-
-@app.route('/<name>/')
-def welcome(name):
-    return render_template('welcome.html', name=name)
+    data = request.args["id"]
+    return render_template('index.html', data=data)
 
 """
-Bugs: in welcome page style.css does not load successfully
-1. (Optional): move static/style.css to static/css/style.css
-2. use 'url_for' in templates for linking style.css
-    {{url_for('static', filename='css/style.css')}}
+1. type in url 'http://127.0.0.1:5000/?id=12345'
+2. request function get this dictionary and send to templates
 """
 
