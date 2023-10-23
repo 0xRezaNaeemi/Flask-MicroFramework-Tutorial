@@ -4,11 +4,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    data = request.args["id"]
-    return render_template('index.html', data=data)
+    return render_template('form.html')
 
+@app.route('/submit/')
+def showResult():
+    # email = request.args['email']
+    email = request.args.get('email', 'no email')
+    password = request.args['password']
+    return render_template('result.html', email=email, password=password)
 """
-1. type in url 'http://127.0.0.1:5000/?id=12345'
-2. request function get this dictionary and send to templates
+1. work with form
+2. send data with GET method from to urls 
 """
 
