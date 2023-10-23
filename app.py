@@ -1,4 +1,10 @@
+
+import os
 from flask import Flask , render_template, request
+
+path = os.path.join("uploads")
+
+os.makedirs(path, exist_ok=True)
 
 app = Flask(__name__)
 
@@ -20,7 +26,15 @@ def upload():
 @app.route('/uploaded/', methods=['POST'])
 def savefile():
     theFile = request.files['file']
-    return theFile.filename
+    if theFile.filename != "":
+        try:
+            goal_path = theFile.save(os.path.join(path, theFile.filename))
+            theFile.save(goal_path)
+            return "your file has been saved successfully"
+        except Exception as e:
+            return e
+    else:
+        return "the file name is invalid"
 
 
 
