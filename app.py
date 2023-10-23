@@ -4,12 +4,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', name="Reza")
 
 """
-1. create 'static' folder
-2. create style.css in static folder
-3. link style.css with index.html
-4. change body background-color in style.css
+1. put 'name="Reza"' in render_template function as a second argument
+2. use '{{name}}' variable in index.html
 """
 
