@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./static/style.css">
 </head>
 <body>
-    Hello {{name}}
+    <ul>
+        {% for number in my_list %}
+            <li>
+                {{number}}
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

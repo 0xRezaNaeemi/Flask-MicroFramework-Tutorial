@@ -4,10 +4,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', name="Reza")
+    context = [1, 2, 3, 4, 5]
+    return render_template('index.html', my_list=context)
 
 """
-1. put 'name="Reza"' in render_template function as a second argument
-2. use '{{name}}' variable in index.html
+1. create a list and pass to render_template
+2. use 'for' from jinja templates language in index.html
 """
 
