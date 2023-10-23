@@ -6,14 +6,14 @@ app = Flask(__name__)
 def index():
     return render_template('form.html')
 
-@app.route('/submit/')
+@app.route('/submit/', methods=["POST"]) # methods=["POST", "GET"]
 def showResult():
-    # email = request.args['email']
-    email = request.args.get('email', 'no email')
-    password = request.args['password']
+    email = request.form['email']
+    # email = request.form.get('email', 'no email')
+    password = request.form['password']
     return render_template('result.html', email=email, password=password)
 """
 1. work with form
-2. send data with GET method from to urls 
+2. send data with POST method
 """
 
