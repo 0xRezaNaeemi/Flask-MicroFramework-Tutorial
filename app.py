@@ -12,7 +12,9 @@ def welcome(name):
     return render_template('welcome.html', name=name)
 
 """
-1. pass name variable from url to templates
-2. use name in index.html
+Bugs: in welcome page style.css does not load successfully
+1. (Optional): move static/style.css to static/css/style.css
+2. use 'url_for' in templates for linking style.css
+    {{url_for('static', filename='css/style.css')}}
 """
 
