@@ -46,8 +46,10 @@ def savefile():
 
 
 """
-Check File format filter:
+File format filter in front-end:
 
-1. create checkFileFormat() function (line 11)
-2. call checkFileFormat() function (line 36)
+1. recode upload.html (line 89), 
+    Use the accept attribute of the input tag.
+    To accept only PNG's, JPEG's and GIF's you can use the following code:
+    <input type="file" accept="image/png, image/gif, image/jpeg" name="file"/>
 """
