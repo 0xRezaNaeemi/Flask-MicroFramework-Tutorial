@@ -1,20 +1,20 @@
 
 import os
-from flask import Flask , render_template, request,redirect
+from flask import Flask , render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return redirect("/upload")
+    return redirect(url_for('redirectToThisFunction'))
 
 @app.route('/upload/')
-def upload():
+def redirectToThisFunction():
     return render_template('upload.html')
 
 """
-redirect function:
+redirect and url_for:
 
-1. import redirect function from flask module
-2. call redirect (line 9)
+1. import redirect and url_for from flask module
+2. call redirect and url_for (line 9)
 """
