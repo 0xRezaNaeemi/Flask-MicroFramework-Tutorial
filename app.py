@@ -37,9 +37,3 @@ def savefile():
         return "the file name is invalid"
 
 
-
-"""
-1. upload a file
-2. send data with POST method
-"""
-
