@@ -1,6 +1,6 @@
 
 import os
-from flask import Flask, render_template#, abort
+from flask import Flask, render_template, abort, redirect, url_for
 
 app = Flask(__name__)
 
@@ -13,10 +13,12 @@ def index():
 def form():
     return render_template('form.html')
 
-# @app.route('/404')
-# def error404():
-#     # abort(503)
-#     abort(404)
+@app.route('/admin')
+def adminPanel():
+    # abort(503)
+    # abort(404)
+    # abort(redirect(url_for('index')))
+    abort(redirect("404.html"))
 
 @app.errorhandler(404)
 def showError(error):
@@ -25,10 +27,10 @@ def showError(error):
 
 
 """
-error 404 handling BugFix:
+abort function:
 
-1. no need to import abort function
-2. comment line 16-19
-3. type mispelled route in url 
-    http://127.0.0.1:5000/formm
+1.import abort, redirect, url_for functions
+2. create admin route
+3. for security purpose we abort 404 or redirect to home  
+    http://127.0.0.1:5000/admin
 """
