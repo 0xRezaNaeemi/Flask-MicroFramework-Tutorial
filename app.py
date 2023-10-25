@@ -1,36 +1,39 @@
 
 import os
-from flask import Flask, render_template, abort, redirect, url_for
+from flask import Flask, render_template, request, make_response
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return render_template('upload.html')
+def home():
+    if request.cookies.get("user_email"):
+        return f"welcome your email is: {request.cookies['user_email']}"
+    else:
+        return render_template('form.html')
 
-@app.route('/form')
-def form():
-    return render_template('form.html')
 
-@app.route('/admin')
-def adminPanel():
-    # abort(503)
-    # abort(404)
-    # abort(redirect(url_for('index')))
-    abort(redirect("404.html"))
+@app.route("/submit", methods=["POST"])
+def submitForm():
+    try:
+        email = request.form["email"]
+        # password = request.form["password"]
 
-@app.errorhandler(404)
-def showError(error):
-    # return "The error is " + str(error)
-    return render_template("404.html"), 404
+        # request.cookies["email"] = "asdf" # this dic is immuteable 
+        # 
+        response = make_response("Successful <a href='/'> HOME </a>")
+        response.set_cookie("user_email", email)
+        return response
+    except Exception as e:
+        return f"sorry not successful the error was: {e}"
 
 
 """
-abort function:
+cookies:
 
-1.import abort, redirect, url_for functions
-2. create admin route
-3. for security purpose we abort 404 or redirect to home  
-    http://127.0.0.1:5000/admin
+1.import request, make_response 
+2. no need to import cookies because cookies are in request
+2. we can not use request.cookies["email"] = "asdf" because Dictionary is imuteable
+3.  make_response convert returned responses to client, so we can add cookies to responses by make_response function
+4. create "if" statement in home def for checking cookies
 """
