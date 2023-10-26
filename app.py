@@ -1,5 +1,5 @@
 
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -25,14 +25,18 @@ class User(db.Model):
 def home():
     return db_dir
 
-"""
-create database:
+@app.route('/add')
+def addUser():
+    try:
+        user = User()
+        user.name = "Reza"
+        db.session.add(user)
+        db.session.commit()
+        return "Adding user successfully!"
+    except Exception as e:
+        return "Adding user failed! error is: " + str(e)
 
-1. pip install Flask-SQLAlchemy 
-2. from flask_sqlalchemy import SQLAlchemy
-3. app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + db_dir
-4. creating a database use this function
-    with app.app_context():
-        db.create_all()
+"""
+create a user to database
 
 """
