@@ -29,7 +29,7 @@ def home():
     # users = User.query.filter(User.name.like("re%")).all()
     # users = User.query.filter(User.name.contains("re")).all()
     # users = User.query.filter(User.name.ilike("re%")).all()
-    users = User.query.filter(User.name.ilike("%za")).all()
+    users = User.query.all()
 
 
     return render_template("result.html", users=users)
@@ -50,17 +50,27 @@ def updateUser():
     try:
         user = User.query.filter_by(name="Reza").first()
         user.name = "Mohammad"
-        # db.session.add(user)
         db.session.commit()
         return "User updated successfully " + "<a href='/'> Home </a>"
     except Exception as e:
         return "Updating user failed, error is: " + str(e)
     
 
+@app.route('/delete')
+def deleteUser():
+    try:
+        user = User.query.filter_by(name="Reza").first()
+        db.session.delete(user)
+        db.session.commit()
+        return "User deleted successfully " + "<a href='/'> Home </a>"
+    except Exception as e:
+        return "Deleting user failed, error is: " + str(e)
+    
+
 
 """
-like, ilike, contains filters
+delete a user from database
 
-1. line 29-32
+1. line 60-68
 
 """
