@@ -1,39 +1,6 @@
-
-from flask import Flask, session, render_template
-from flask_sqlalchemy import SQLAlchemy
-import os
-
-app = Flask(__name__)
-
-path = os.path.dirname(__file__)
-db_dir = os.path.join(path, "app.db")
-
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + db_dir
-
-db = SQLAlchemy(app)
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-
-    def __repr__(self):
-        return self.name
-    
-class Writer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-
-class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-
-    writer_id = db.Column(db.Integer(), db.ForeignKey("writer.id"))
-    writer = db.relationship("Writer", backref = db.backref("books"))
-
-# use one time when creating a database
-with app.app_context():
-    db.create_all()
+from flask_app import app, db
+from flask_app.models import Book, Writer, User
+from flask import render_template
 
 @app.route("/addbook")
 def addBook():
@@ -94,11 +61,6 @@ def deleteUser():
     except Exception as e:
         return "Deleting user failed, error is: " + str(e)
     
-
-
-"""
-work with Model, relationship, ForeignKey
-
-1. line 16-53
-
-"""
+@app.errorhandler(404)
+def showError(error):
+    return "The error is " + str(error)
