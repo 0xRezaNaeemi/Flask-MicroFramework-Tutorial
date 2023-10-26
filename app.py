@@ -26,8 +26,11 @@ class User(db.Model):
 
 @app.route('/')
 def home():
-    users = User.query.all()
-    # users2 = User.query.first()
+    # users = User.query.filter(User.name.like("re%")).all()
+    # users = User.query.filter(User.name.contains("re")).all()
+    # users = User.query.filter(User.name.ilike("re%")).all()
+    users = User.query.filter(User.name.ilike("%za")).all()
+
 
     return render_template("result.html", users=users)
 
@@ -56,8 +59,8 @@ def updateUser():
 
 
 """
-update a user in database
+like, ilike, contains filters
 
-1. line 45-54
+1. line 29-32
 
 """
