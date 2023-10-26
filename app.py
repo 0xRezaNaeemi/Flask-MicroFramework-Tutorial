@@ -1,5 +1,5 @@
 
-from flask import Flask, session
+from flask import Flask, session, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -23,7 +23,10 @@ class User(db.Model):
 
 @app.route('/')
 def home():
-    return db_dir
+    users = User.query.all()
+    # users2 = User.query.first()
+
+    return render_template("result.html", users=users)
 
 @app.route('/add')
 def addUser():
@@ -37,6 +40,6 @@ def addUser():
         return "Adding user failed! error is: " + str(e)
 
 """
-create a user to database
+read from database
 
 """
