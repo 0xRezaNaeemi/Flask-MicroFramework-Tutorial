@@ -6,10 +6,22 @@
     <title>Result</title>
 </head>
 <body>
-    {% for user in users  %}
+    {% if not books %}
+            {% for user in users  %}
         <p>
-            {{user}}
+            {{user.name}}
         </p>
     {% endfor %}
+    {% else %}
+        {% for book in books  %}
+        <p>
+            <span style="background-color: red; padding: 10px;">{{book.writer_id}}</span>
+            <span style="background-color: red; padding: 10px;">{{book.name}}</span>
+            <span style="background-color: red; padding: 10px;">{{book.writer.name}}</span>
+
+
+        </p>
+    {% endfor %}
+    {% endif %}
 </body>
 </html>

@@ -15,14 +15,42 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
+    name = db.Column(db.String(80), nullable=False)
 
     def __repr__(self):
         return self.name
     
+class Writer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+
+    writer_id = db.Column(db.Integer(), db.ForeignKey("writer.id"))
+    writer = db.relationship("Writer", backref = db.backref("books"))
+
 # use one time when creating a database
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
+
+@app.route("/addbook")
+def addBook():
+    try:
+        writer = Writer(name="Elham")
+        book = Book(name="The Book", writer=writer)
+        writer.books.append(book)
+        db.session.add(book)
+        db.session.commit()
+        return "Adding book successfully ==>> " + "<a href='/books'> All Books </a>"
+    except Exception as e:
+        return "Adding book failed ==>> " + str(e)
+
+@app.route('/books')
+def showBook():
+    books = Book.query.all()
+    return render_template("result.html", books=books)
 
 @app.route('/')
 def home():
@@ -69,8 +97,8 @@ def deleteUser():
 
 
 """
-delete a user from database
+work with Model, relationship, ForeignKey
 
-1. line 60-68
+1. line 16-53
 
 """
