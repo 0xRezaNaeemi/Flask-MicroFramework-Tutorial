@@ -17,6 +17,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
+    def __repr__(self):
+        return self.name
+    
 # use one time when creating a database
 # with app.app_context():
 #     db.create_all()
@@ -40,6 +43,8 @@ def addUser():
         return "Adding user failed! error is: " + str(e)
 
 """
-read from database
+magic Functon __repr__()
+
+1. line 20-21
 
 """
