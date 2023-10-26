@@ -42,9 +42,22 @@ def addUser():
     except Exception as e:
         return "Adding user failed! error is: " + str(e)
 
-"""
-magic Functon __repr__()
+@app.route('/update')
+def updateUser():
+    try:
+        user = User.query.filter_by(name="Reza").first()
+        user.name = "Mohammad"
+        # db.session.add(user)
+        db.session.commit()
+        return "User updated successfully " + "<a href='/'> Home </a>"
+    except Exception as e:
+        return "Updating user failed, error is: " + str(e)
+    
 
-1. line 20-21
+
+"""
+update a user in database
+
+1. line 45-54
 
 """
